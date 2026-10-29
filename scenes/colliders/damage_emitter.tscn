@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c66g4p0y8g3y"]
+
+[ext_resource type="Script" uid="uid://w34mkkomshnk" path="res://scenes/colliders/damage_emitter.gd" id="1_tuyxn"]
+
+[node name="DamageEmitter" type="Area2D" unique_id=60220367]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("1_tuyxn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1116064235]
+debug_color = Color(0.8570692, 0.34720185, 0.31431618, 0.41960785)
