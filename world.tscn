@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c7en17mxa7j33" path="res://world.gd" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://wyqvfqkpdbrl" path="res://scenes/characters/player.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://jv01e7lyx8eo" path="res://scenes/props/barrel.tscn" id="4_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://yi5fvux51g5a" path="res://scenes/characters/basic_enemy.tscn" id="5_036b0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlwt5"]
 size = Vector2(6, 64)
@@ -39,3 +40,13 @@ position = Vector2(49, 43)
 
 [node name="Barrel" parent="ActorsContainer" unique_id=1514872094 instance=ExtResource("4_aqk2v")]
 position = Vector2(78, 46)
+
+[node name="BasicEnemy" parent="ActorsContainer" unique_id=840679248 node_paths=PackedStringArray("player") instance=ExtResource("5_036b0")]
+position = Vector2(82, 57)
+player = NodePath("../Player")
+speed = 12.0
+
+[node name="BasicEnemy2" parent="ActorsContainer" unique_id=194359646 node_paths=PackedStringArray("player") instance=ExtResource("5_036b0")]
+position = Vector2(17, 57)
+player = NodePath("../Player")
+speed = 12.0
