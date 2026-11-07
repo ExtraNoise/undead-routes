@@ -29,7 +29,7 @@ const GRAVITY := 600.0
 enum State {IDLE, WALK, ATTACK, TAKEOFF, JUMP, LAND, JUMPKICK, HURT, FALL, GROUNDED, DEATH, FLY, PREP_ATTACK, THROW}
 
 var anim_attacks := []
-var anim_map : Dictionary = {
+var anim_map := {
 	State.IDLE: "idle",
 	State.WALK: "walk",
 	State.TAKEOFF: "takeoff",
@@ -68,7 +68,7 @@ func _process(delta: float) -> void:
 	handle_air_time(delta)
 	handle_prep_attack()
 	handle_grounded()
-	handle_knife_respawns()
+	handle_knife_respawn()
 	handle_death(delta)
 	set_heading()
 	flip_sprites()
@@ -98,7 +98,7 @@ func handle_grounded() -> void:
 		else:
 			state = State.LAND
 
-func handle_knife_respawns() -> void:
+func handle_knife_respawn() -> void:
 	if can_respawn_knives and not has_knife and (Time.get_ticks_msec() - time_since_knife_dismiss > duration_between_knife_respawn):
 		has_knife = true
 
@@ -201,9 +201,9 @@ func on_emit_damage(receiver: DamageReceiver) -> void:
 	if attack_combo_index == anim_attacks.size() - 1:
 		hit_type = DamageReceiver.HitType.POWER
 		current_damage = damage_power
-	receiver.damage_received.emit(damage, direction, hit_type)
+	receiver.damage_received.emit(current_damage, direction, hit_type)
 	is_last_hit_successful = true
-	
+
 func on_emit_collateral_damage(receiver: DamageReceiver) -> void:
 	if receiver != damage_receiver:
 		var direction := Vector2.LEFT if receiver.global_position.x < global_position.x else Vector2.RIGHT
@@ -211,5 +211,5 @@ func on_emit_collateral_damage(receiver: DamageReceiver) -> void:
 
 func on_wall_hit(_wall: AnimatableBody2D) -> void:
 	state = State.FALL
-	height_speed = knockdown_intensity
+	height_speed = knockback_intensity
 	velocity = -velocity / 2.0
